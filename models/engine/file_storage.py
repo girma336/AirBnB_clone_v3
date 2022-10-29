@@ -72,7 +72,7 @@ class FileStorage:
     def get(self, cls, id):
         """A method to retrive one object"""
         
-        if cls not in None:
+        if cls in classes:
             all_obje = self.all(cls);
             for key in all_obje.keys():
                 if key == id:
@@ -84,7 +84,7 @@ class FileStorage:
 
         if cls is None:
             return len(self.__objects)
-        if cls in self.__models_available:
+        if cls in classes:
             return len(self.all(cls))
         return -1
             

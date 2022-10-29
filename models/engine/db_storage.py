@@ -84,10 +84,10 @@ class DBStorage:
             Return:
             object of cls and id passed in argument or None
             """
-            if (cls not in self.__models_available) or (id_ is None):
+            if (cls not in classes) or (id_ is None):
                 return None
             return self.__session.query(
-                    self.__models_available[cls]).get(id_)
+                    classes[cls]).get(id_)
 
     def count(self, cls=None):
         """
@@ -100,9 +100,9 @@ class DBStorage:
         """
         if cls is None:
             total = 0
-            for v in self.__models_available.values():
+            for v in classes.values():
                 total += self.__session.query(v).count()
             return total
-        if cls in self.__models_available.keys():
-            return self.__session.query(self.__models_available[cls]).count()
+        if cls in classes.keys():
+            return self.__session.query(classes[cls]).count()
         return -1    
